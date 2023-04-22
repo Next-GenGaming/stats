@@ -1,5 +1,11 @@
 FROM node:19-alpine
 
+LABEL Name="Rust Stats"
+LABEL description="This is will provide a api to get data from the Player Ranks plugin and pull it into a webservice. Designed for Next-Gen Gaming"
+LABEL version="1.0"
+LABEL maintainer="whitlocktech"
+LABEL maintainer_email="whitlocktech@gmail.com"
+
 WORKDIR /app
 
 COPY package*.json .

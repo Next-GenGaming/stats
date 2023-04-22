@@ -12,6 +12,6 @@ services:
      - PORT=5500
      - HOST=192.168.0.133
      - USER=playerranks
-     - PASSWORD=CETvJCIxhFelkhA1sttzsK4f7aSx6OREvyAoxG
+     - PASSWORD=test
      - DB=playerranks
    restart: unless-stopped

@@ -3,3 +3,4 @@
 /log/
 audit.json
 old.server.js
+docker-compose.yml
