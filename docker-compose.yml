@@ -7,7 +7,7 @@ services:
    ports:
      - 5500:5500
    volumes:
-     - ./logs:/logs
+     - ./log:/log
    environment:
      - PORT=5500
      - HOST=192.168.0.133
