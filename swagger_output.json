@@ -1,15 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "version": "1.1.5",
+    "title": "Next-Gen Gaming Rust Stats",
+    "description": "The stats api for the Player Ranks plugin for the rust game"
   },
-  "host": "https://stats.next-gengaming.com",
+  "host": "stats.next-gengaming.com",
   "basePath": "/v1",
-  "schemes": [
-    "http"
-  ],
+  "schemes": "https",
   "paths": {
     "/stats/": {
       "get": {
