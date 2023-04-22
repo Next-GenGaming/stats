@@ -6,6 +6,8 @@ const fs = require('fs')
 const fsr = require('file-stream-rotator')
 const api = require('./routes/api')
 const db = require('./services/sql')
+const swaggerUI = require('swagger-ui-express')
+const swaggerFile = require('./swagger_output.json')
 
 const logDirectory = path.join(__dirname, 'log')
 
@@ -25,10 +27,14 @@ app.use(cors({
     origin: '*'
 }))
 
-app.use('/v1', api)
+
 
 app.use(morgan('combined', {stream: logStream}))
 
 app.use(express.json())
+
+app.use('/v1', api)
+
+app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerFile))
 
 module.exports = app
