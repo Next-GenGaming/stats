@@ -5,8 +5,8 @@
     "title": "REST API",
     "description": ""
   },
-  "host": "stats.next-gengaming.com",
-  "basePath": "/",
+  "host": "https://stats.next-gengaming.com",
+  "basePath": "/v1",
   "schemes": [
     "http"
   ],
