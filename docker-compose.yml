@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  rust-stats:
+   image: whitlocktech/rust-stats
+   container_name: Rust-Stats
+   ports:
+     - 5500:5500
+   volumes:
+     - ./logs:/logs
+   environment:
+     - PORT=5500
+     - HOST=192.168.0.133
+     - USER=playerranks
+     - PASSWORD=CETvJCIxhFelkhA1sttzsK4f7aSx6OREvyAoxG
+     - DB=playerranks
+   restart: unless-stopped
