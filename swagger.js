@@ -2,7 +2,7 @@ const swaggerAutogen = require('swagger-Autogen')()
 
 const doc = {
     info: {
-        version: '1.1.6',
+        version: '1.1.8',
         title: 'Next-Gen Gaming Rust Stats',
         description: 'The stats api for the Player Ranks plugin for the rust game'
     },

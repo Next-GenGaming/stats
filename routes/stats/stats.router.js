@@ -61,6 +61,6 @@ statsRouter.get('/itemscrafted', itemsCrafted)
 statsRouter.get('/entitiesrepaired', entitiesRepaired)
 statsRouter.get('/resourcesgathered', resourcesGathered)
 statsRouter.get('/plantsgathered', plantsGathered)
-statsRouter.get('/${username}', getPlayerStats)
+statsRouter.get('/player/:username', getPlayerStats)
 
 module.exports = statsRouter
