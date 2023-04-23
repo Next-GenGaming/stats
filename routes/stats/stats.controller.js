@@ -365,6 +365,21 @@ async function plantsGathered(req, res) {
     })
 }
 
+async function getPlayerStats(req, res) {
+    const username = req.params.username
+    const query = 'SELECT PlayerRankData_properties_UserID, PlayerRankData_properties_Name, PlayerRankData_properties_PVEKills, PlayerRankData_properties_PVEDistance, PlayerRankData_properties_NPCKills, PlayerRankData_properties_NPCDistance, PlayerRankData_properties_HeadShots, PlayerRankData_properties_Deaths, PlayerRankData_properties_Suicides, PlayerRankData_properties_KDR, PlayerRankData_properties_TimesWounded, PlayerRankData_properties_TimesHealed, PlayerRankData_properties_HeliHits, PlayerRankData_properties_HeliKills, PlayerRankData_properties_APCHits, PlayerRankData_properties_APCKills, PlayerRankData_properties_BarrelsDestroyed, PlayerRankData_properties_ArrowsFired, PlayerRankData_properties_BulletsFired, PlayerRankData_properties_RocketsLaunched, PlayerRankData_properties_DropsLooted, PlayerRankData_properties_StructuresBuilt, PlayerRankData_properties_StructuresDemolished, PlayerRankData_properties_ItemsDeployed, PlayerRankData_properties_ItemsCrafted,PlayerRankData_properties_EntitiesRepaired, PlayerRankData_properties_ResourcesGathered, PlayerRankData_properties_StructuresUpgraded, PlayerRankData_properties_FishCaught, PlayerRankData_properties_PlantsGathered FROM PlayerRanks WHERE username = PlayerRankData_properties_Name'
+
+    connection.query(query, (err, results) => {
+        console.log('quering the db')
+        if (err) {
+            res.status(500).send('Error retrieving data')
+            return
+        }
+
+        res.json(results)
+    })
+}
+
 module.exports = {
     getAllStats,
     pveKills,
@@ -393,5 +408,6 @@ module.exports = {
     itemsCrafted,
     entitiesRepaired,
     resourcesGathered,
-    plantsGathered
+    plantsGathered,
+    getPlayerStats
 }
