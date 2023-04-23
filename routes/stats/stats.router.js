@@ -26,7 +26,8 @@ const { getAllStats,
     itemsCrafted,
     entitiesRepaired,
     resourcesGathered,
-    plantsGathered
+    plantsGathered,
+    getPlayerStats
     } = require('./stats.controller')
 
 const statsRouter = express.Router()
@@ -60,5 +61,6 @@ statsRouter.get('/itemscrafted', itemsCrafted)
 statsRouter.get('/entitiesrepaired', entitiesRepaired)
 statsRouter.get('/resourcesgathered', resourcesGathered)
 statsRouter.get('/plantsgathered', plantsGathered)
+statsRouter.get('/player/:username', getPlayerStats)
 
 module.exports = statsRouter

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.1.5",
+    "version": "1.1.8",
     "title": "Next-Gen Gaming Rust Stats",
     "description": "The stats api for the Player Ranks plugin for the rust game"
   },
@@ -391,6 +391,27 @@
       "get": {
         "description": "",
         "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stats/player/{username}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"

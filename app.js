@@ -6,6 +6,7 @@ const fs = require('fs')
 const fsr = require('file-stream-rotator')
 const api = require('./routes/api')
 const db = require('./services/sql')
+const helmet = require('helmet')
 const swaggerUI = require('swagger-ui-express')
 const swaggerFile = require('./swagger_output.json')
 
@@ -22,6 +23,8 @@ const logStream = fsr.getStream({
 })
 
 const app = express()
+
+app.use(helmet())
 
 app.use(cors({
     origin: '*'
