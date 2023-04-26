@@ -1,3 +1,4 @@
+const axios = require('axios')
 const connection = require('../../services/sql')
 
 async function getAllStats(req, res) {
@@ -375,7 +376,25 @@ async function getPlayerStats(req, res) {
             res.status(500).send('Error retrieving data')
             return
         }
-        res.json(results)
+        const steamid = results[0].PlayerRankData_properties_UserID
+        const steamApiUrl = `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.STEAM_API_KEY}&steamids=${steamid}`
+
+        // Use axios to make a GET request to the Steam API
+        axios.get(steamApiUrl)
+            .then((steamResponse) => {
+                // Extract the avatar URL from the Steam API response
+                const avatarUrl = steamResponse.data.response.players[0].avatarfull
+
+                // Add the avatar URL to the existing results object
+                results[0].avatarUrl = avatarUrl
+
+                // Send the updated results object as a JSON response
+                res.json(results)
+            })
+            .catch((steamError) => {
+                console.error('Error fetching Steam data', steamError)
+                res.status(500).send('Error retrieving data')
+            })
     })
 }
 
