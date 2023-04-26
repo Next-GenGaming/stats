@@ -14,4 +14,5 @@ services:
      - USER=playerranks
      - PASSWORD=test
      - DB=playerranks
+     - STEAM_API_KEY=<STEAM_API_KEY>
    restart: unless-stopped
