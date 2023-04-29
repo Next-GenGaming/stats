@@ -4,19 +4,19 @@ require('dotenv').config()
 
 const steamApiKey = process.env.STEAM_API_KEY
 
-const { getProfile, getMultipleProfiles } = require('@whitlocktech/steam-api-wrapper')
+const { getProfile } = require('@whitlocktech/steam-api-wrapper')
 
 
-async function getSteamProfileData(steamId) {
-    await steam.getProfile(steamId)
-        .then(console.log)
-    return
-}
+// async function getSteamProfileData(steamId) {
+//     await steam.getProfile(steamId)
+//         .then(console.log)
+//     return
+// }
 
 async function getAllStats(req, res) {
     const query = 'SELECT PlayerRankData_properties_UserID, PlayerRankData_properties_Name, PlayerRankData_properties_PVEKills, PlayerRankData_properties_PVEDistance, PlayerRankData_properties_NPCKills, PlayerRankData_properties_NPCDistance, PlayerRankData_properties_HeadShots, PlayerRankData_properties_Deaths, PlayerRankData_properties_Suicides, PlayerRankData_properties_KDR, PlayerRankData_properties_TimesWounded, PlayerRankData_properties_TimesHealed, PlayerRankData_properties_HeliHits, PlayerRankData_properties_HeliKills, PlayerRankData_properties_APCHits, PlayerRankData_properties_APCKills, PlayerRankData_properties_BarrelsDestroyed, PlayerRankData_properties_ArrowsFired, PlayerRankData_properties_BulletsFired, PlayerRankData_properties_RocketsLaunched, PlayerRankData_properties_DropsLooted, PlayerRankData_properties_StructuresBuilt, PlayerRankData_properties_StructuresDemolished, PlayerRankData_properties_ItemsDeployed, PlayerRankData_properties_ItemsCrafted,PlayerRankData_properties_EntitiesRepaired, PlayerRankData_properties_ResourcesGathered, PlayerRankData_properties_StructuresUpgraded, PlayerRankData_properties_FishCaught, PlayerRankData_properties_PlantsGathered FROM PlayerRanks'
 
-    connection.query(query, (err, results) => {
+    connection.query(query, async (err, results) => {
         console.log('quering the db')
         if (err) {
             res.status(500).send('Error retrieving data')
@@ -393,7 +393,7 @@ async function getPlayerStats(req, res) {
 
         try {
             const profile = await getProfile(steamApiKey, steamId)
-            const data = [results, profile]
+            const data = results.concat(profile)
             res.json(data)
         } catch (error) {
             console.error(error)
@@ -401,29 +401,6 @@ async function getPlayerStats(req, res) {
         }
     })
 }
-
-
-        // const steamid = results[0].PlayerRankData_properties_UserID
-        // const steamApiUrl = `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.STEAM_API_KEY}&steamids=${steamid}`
-
-        // // Use axios to make a GET request to the Steam API
-        // axios.get(steamApiUrl)
-        //     .then((steamResponse) => {
-        //         // Extract the avatar URL from the Steam API response
-        //         const avatarUrl = steamResponse.data.response.players[0].avatarfull
-
-        //         // Add the avatar URL to the existing results object
-        //         results[0].avatarUrl = avatarUrl
-
-        //         // Send the updated results object as a JSON response
-        //         res.json(results)
-        //     })
-        //     .catch((steamError) => {
-        //         console.error('Error fetching Steam data', steamError)
-        //         res.status(500).send('Error retrieving data')
-        //     })
-//     })
-// }
 
 module.exports = {
     getAllStats,
